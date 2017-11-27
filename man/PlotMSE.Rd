@@ -60,18 +60,252 @@ WrangleTimeseriesAnnualChange}
 This function contains a complete set of functionality to plot the formal plot types required for an Management Strategy Evaluation Analysis
 }
 \examples{
+plots_folder <- "C:/Users/Mark/Desktop/Plots/"
+results_folder <- "C:/Users/Mark/Box Sync/Baltic - Stockholm/Results-and-plots-2017-09-08/Results/"
+fleet_lookup_table <- "C:/Users/Mark/Desktop/Plots/FleetNameLookupTable.csv"
+
+#Boxplot-AAV-catch
+PlotMSE(
+  func_group_name = "AdCod", fleet_group_name = "AllFleets",
+  start_year = 1, end_year = 19,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "AAV Catch", x_value_label = "Strategy",
+  units = "\%",
+  n_label_cols = 5,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "CatchTrajectories/"),
+  save_plot_folder = plots_folder,
+  wrangle_function = WrangleBoxplotAAV,
+  plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-AAV-SSB
+PlotMSE(
+  func_group_name = "AdCod",
+  start_year = 1, end_year = 29,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "AAV SSB", x_value_label = "Years",
+  units = "\%",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Biomass/"),
+  save_plot_folder = plots_folder,
+  wrangle_function = WrangleBoxplotAAV,
+  plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-biomass
+PlotMSE(
+  func_group_name = c("JuvCod"),
+  start_year = 1,  end_year = 29,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "Biomass", x_value_label = "Strategy",
+  units = "kt",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Biomass/"),
+  save_plot_folder = plots_folder,
+  total_area = 240000,
+  scale_unit = 1000,
+  wrangle_function = WrangleBoxplotMean,
+  plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-catch
+PlotMSE(
+  func_group_name = "AdCod", fleet_group_name = "AllFleets",
+  start_year = 1,  end_year = 29,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "Average Catch", x_value_label = "Strategy",
+  units = "kt/yr",
+  n_label_cols = 5,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "CatchTrajectories/"),
+  save_plot_folder = plots_folder,
+  total_area = 240000,
+  scale_unit = 1000,
+  wrangle_function = WrangleBoxplotMean,
+  plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-effort
+PlotMSE(
+  fleet_group_name = "ACT0018",
+  start_year = 25,  end_year = 29,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "Effort", x_value_label = "Strategy",
+  units = "",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Effort/"),
+  save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
+  wrangle_function = WrangleBoxplotMean,
+  plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-prob-bref
 PlotMSE(func_group_name = "AdCod",
-fleet_group_name = "AllFleets",
-start_year = 29, end_year = 29,
-true_year_beginning = 1990,
-plot_width_inches = 6, plot_height_inches = 4,
-y_value_label = "AAV Catch", x_value_label = "Strategy",
-units = "\%",
-n_label_cols = 5,
-yearly_in_filename = TRUE,
-results_folder_path = "Results-and-plots-2017-09-08/Results/CatchTrajectories/",
-save_plot_folder = "Plots/",
-wrangle_function = WrangleBoxplotAAV,
-plot_type_fun = PlotBoxplot
+        start_year = 24, end_year = 29,
+        true_year_beginning = 1990,
+        plot_width_inches = 6, plot_height_inches = 4,
+        y_value_label = "Probability",  x_value_label = "Strategy",
+        units = "",
+        n_label_cols = 4,
+        yearly_in_filename = TRUE,
+        results_folder_path = paste0(results_folder, "Biomass/"),
+        save_plot_folder = plots_folder,
+        total_area = 240000,
+        scale_unit = 1000,
+        wrangle_function = WrangleBoxplotProbability,
+        plot_type_fun = PlotBoxplot,
+        bref = 100, plot_title = "Risk: P(SSB < Blim)"
+)
+
+#Boxplot-realisedF
+PlotMSE(func_group_name = "AdCod",
+        start_year = 0,  end_year = 29,
+        true_year_beginning = 1990,
+        plot_width_inches = 6, plot_height_inches = 4,
+        y_value_label = "Realised F",  x_value_label = "Strategy",
+        units = "/km2/yr",
+        n_label_cols = 5,
+        yearly_in_filename = TRUE,
+        results_folder_path = paste0(results_folder, "RealisedF/"),
+        save_plot_folder = plots_folder,
+        wrangle_function = WrangleBoxplotMean,
+        plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-TAC
+PlotMSE(func_group_name = "AdCod", fleet_group_name = "AllFleets",
+        start_year = 5, end_year = 29,
+        true_year_beginning = 1990,
+        plot_width_inches = 6, plot_height_inches = 4,
+        y_value_label = "TAC",  x_value_label = "Strategy",
+        units = "kt",
+        n_label_cols = 5,
+        yearly_in_filename = FALSE,
+        results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
+        save_plot_folder = plots_folder,
+        total_area = 240000,
+        scale_unit = 1000,
+        wrangle_function = WrangleBoxplotMean,
+        plot_type_fun = PlotBoxplot
+)
+
+#Boxplot-effort
+PlotMSE(
+  fleet_group_name = "ACT0018",
+  start_year = 25,  end_year = 29,
+  true_year_beginning = 1990,
+  plot_width_inches = 6, plot_height_inches = 4,
+  y_value_label = "Effort", x_value_label = "Strategy",
+  units = "",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Effort/"),
+  save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
+  wrangle_function = WrangleBoxplotMean,
+  plot_type_fun = PlotBoxplot
+)
+
+
+#Timeseries-biomass
+PlotMSE(
+  func_group_name = "AdCod",
+  true_year_beginning = 1990,
+  plot_width_inches = 12, plot_height_inches = 3,
+  y_value_label = "Biomass", x_value_label = "Years",
+  units = "kt",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Biomass/"),
+  save_plot_folder = plots_folder,
+  total_area = 240000,
+  scale_unit = 1000,
+  plot_type_fun = PlotTimeseries
+)
+
+#Timeseries-realisedF
+PlotMSE(func_group_name = "AdCod",
+        start_year = 4, end_year = 29,
+        true_year_beginning = 1990,
+        plot_width_inches = 12, plot_height_inches = 3,
+        y_value_label = "Realised F",  x_value_label = "Years",
+        units = "/km2/yr",
+        n_label_cols = 5,
+        yearly_in_filename = TRUE,
+        results_folder_path = paste0(results_folder, "RealisedF/"),
+        save_plot_folder = plots_folder,
+        plot_type_fun = PlotTimeseries
+)
+
+#Timeseries-annual-change-TAC
+PlotMSE(
+  func_group_name = "AdCod", fleet_group_name = "AllFleets",
+  true_year_beginning = 1990,
+  plot_width_inches = 12, plot_height_inches = 3,
+  y_value_label = "Annual Change in TAC", x_value_label = "Years",
+  units = "\%",
+  n_label_cols = 5,
+  yearly_in_filename = FALSE,
+  results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
+  save_plot_folder = plots_folder,
+  wrangle_function = WrangleTimeseriesAnnualChange,
+  plot_type_fun = PlotTimeseries
+)
+
+#Timeseries-catch
+PlotMSE(
+  func_group_name = "AdCod", fleet_group_name = "ACT0018",
+  true_year_beginning = 1990,
+  plot_width_inches = 12, plot_height_inches = 3,
+  y_value_label = "Catch", x_value_label = "Years",
+  units = "kt/yr",
+  n_label_cols = 5,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "CatchTrajectories/"),
+  save_plot_folder = plots_folder,
+  total_area = 240000,
+  scale_unit = 1000,
+  plot_type_fun = PlotTimeseries
+)
+
+#Timeseries-effort
+PlotMSE(
+  fleet_group_name = "ACT0018",
+  start_year = NULL, end_year = 29,
+  true_year_beginning = 2004,
+  plot_width_inches = 12, plot_height_inches = 3,
+  y_value_label = "Effort", x_value_label = "Years",
+  n_label_cols = 4,
+  yearly_in_filename = TRUE,
+  results_folder_path = paste0(results_folder, "Effort/"),
+  save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
+  plot_type_fun = PlotTimeseries
+)
+
+#Timeseries-TAC
+PlotMSE(
+  func_group_name = "AdCod", fleet_group_name = "ACT1824",
+  true_year_beginning = 1990,
+  plot_width_inches = 12, plot_height_inches = 3,
+  y_value_label = "TAC", x_value_label = "Years",
+  units = "kt",
+  n_label_cols = 5,
+  yearly_in_filename = FALSE,
+  results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
+  save_plot_folder = plots_folder,
+  total_area = 240000,
+  scale_unit = 1000,
+  plot_type_fun = PlotTimeseries
 )
 }

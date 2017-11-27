@@ -72,6 +72,265 @@ create_table <- function(results_folder_path, ifunc_groups,
 
 }
 
+#' Saves the table to
+#'
+#' @param list_of_tables
+#' @param name_of_file
+#' @param pdf_path
+#' @param pdf.height
+#' @param pdf.width
+#'
+#' @return
+#' @export
+#'
+#' @examples
+save_table_pdf <- function(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width){
+
+  pdf_path_name <- paste0(pdf_path, name_of_file, ".pdf")
+
+  major_table <- Reduce(function(x,y) merge(x,y, by = "StrategyName"), list_of_tables)
+
+  # reduce the number of decimal places
+  major_table <- df_reduce_decimal_places(major_table, number_decimal_places)
+
+  pdf(pdf_path_name, height = pdf.height, width = pdf.width)
+  gridExtra::grid.table(major_table)
+  dev.off()
+
+}
+
+df_reduce_decimal_places <- function(major_table, number_decimal_places){
+  major_table <- as.data.frame(major_table)
+  is.num <- sapply(major_table, is.numeric)
+  major_table[is.num] <- as.data.table(lapply(major_table[is.num], round, number_decimal_places))
+}
+
+#' Title
+#'
+#' @param number_decimal_places
+#' @param functional_group
+#' @param results_folder_path
+#' @param pdf_path
+#' @param pdf.height
+#' @param pdf.width
+#' @param first_year_hindcast
+#' @param first_year_forecast
+#' @param first_year_selection
+#' @param second_year_selection
+#' @param third_year_selection
+#' @param blim
+#' @param bpa
+#' @param area
+#' @param scale
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' biomass_table_default(number_decimal_places = 4, functional_group = "AdCod",
+#' results_folder_path = "C:/Users/Mark/Box Sync/Baltic - Stockholm/Results-and-plots-2017-09-08/Results/",
+#' pdf_path = "C:/Users/Mark/Desktop/Plots/", pdf.height = 2, pdf.width = 17,
+#' first_year_hindcast = 1990, first_year_forecast = 2000, first_year_selection = 2010,
+#' second_year_selection = 2012, third_year_selection = 2015,
+#' blim = 0.4, bpa = 0.5, area = 240000, scale = 1000)
+biomass_table_default <- function(number_decimal_places, functional_group,
+                                  results_folder_path, pdf_path, pdf.height, pdf.width,
+                                  first_year_hindcast, first_year_forecast, first_year_selection,
+                                  second_year_selection, third_year_selection,
+                                  blim, bpa, area, scale){
+
+  results_folder_path_biomass = paste0(results_folder_path, "Biomass/")
+  results_folder_path_landings = paste0(results_folder_path, "LandingsTrajectories/")
+  results_folder_path_realisedF = paste0(results_folder_path, "RealisedF/")
+  results_folder_path_HCR_Quota = paste0(results_folder_path, "HCRQuota_Targ/")
+
+  blim_table_2010 <- create_table(results_folder_path = results_folder_path_biomass,
+                                  fun = calc_prob_below,
+                                  ifunc_groups = functional_group,
+                                  yearly_in_filename = "Yearly",
+                                  n_label_cols = 4,
+                                  col_name = 'p(<Blim)',
+                                  year = first_year_selection,
+                                  first_year = first_year_hindcast,
+                                  bref = blim
+  )
+
+  blim_table_2012 <- create_table(results_folder_path = results_folder_path_biomass,
+                                  fun = calc_prob_below,
+                                  ifunc_groups = functional_group,
+                                  yearly_in_filename = "Yearly",
+                                  n_label_cols = 4,
+                                  col_name = 'p(<Blim)',
+                                  year = second_year_selection,
+                                  first_year = first_year_hindcast,
+                                  bref = blim
+  )
+
+  blim_table_2015 <- create_table(results_folder_path = results_folder_path_biomass,
+                                  fun = calc_prob_below,
+                                  ifunc_groups = functional_group,
+                                  yearly_in_filename = "Yearly",
+                                  n_label_cols = 4,
+                                  col_name = 'p(<Blim)',
+                                  year = third_year_selection,
+                                  first_year = first_year_hindcast,
+                                  bref = blim
+  )
+
+  bpa_table_2010 <- create_table(results_folder_path = results_folder_path_biomass,
+                                 fun = calc_prob_below,
+                                 ifunc_groups = functional_group,
+                                 yearly_in_filename = "Yearly",
+                                 n_label_cols = 4,
+                                 col_name = 'p(<Bpa)',
+                                 year = first_year_selection,
+                                 first_year = first_year_hindcast,
+                                 bref = bpa
+  )
+
+  bpa_table_2012 <- create_table(results_folder_path = results_folder_path_biomass,
+                                 fun = calc_prob_below,
+                                 ifunc_groups = functional_group,
+                                 yearly_in_filename = "Yearly",
+                                 n_label_cols = 4,
+                                 col_name = 'p(<Bpa)',
+                                 year = second_year_selection,
+                                 first_year = first_year_hindcast,
+                                 bref = bpa
+  )
+
+  bpa_table_2015 <- create_table(results_folder_path = results_folder_path_biomass,
+                                 fun = calc_prob_below,
+                                 ifunc_groups = functional_group,
+                                 yearly_in_filename = "Yearly",
+                                 n_label_cols = 4,
+                                 col_name = 'p(<Bpa)',
+                                 year = third_year_selection,
+                                 first_year = first_year_hindcast,
+                                 bref = bpa
+  )
+
+  yield_table_2010 <- create_table(results_folder_path = results_folder_path_landings,
+                                   fun = calc_avg,
+                                   ifunc_groups = functional_group,
+                                   fleet_group_number = "AllFleets",
+                                   yearly_in_filename = "Yearly",
+                                   n_label_cols = 5,
+                                   col_name = 'avg(Y) (kt)',
+                                   year = first_year_selection,
+                                   first_year = first_year_forecast,
+                                   area = area,
+                                   scale = scale
+  )
+
+  yield_table_2012 <- create_table(results_folder_path = results_folder_path_landings,
+                                   fun = calc_avg,
+                                   ifunc_groups = functional_group,
+                                   fleet_group_number = "AllFleets",
+                                   yearly_in_filename = "Yearly",
+                                   n_label_cols = 5,
+                                   col_name = 'avg(Y) (kt)',
+                                   year = second_year_selection,
+                                   first_year = first_year_forecast,
+                                   area = area,
+                                   scale = scale
+
+  )
+
+  yield_table_2015 <- create_table(results_folder_path = results_folder_path_landings,
+                                   fun = calc_avg,
+                                   ifunc_groups = functional_group,
+                                   fleet_group_number = "AllFleets",
+                                   yearly_in_filename = "Yearly",
+                                   n_label_cols = 5,
+                                   col_name = 'avg(Y) (kt)',
+                                   year = third_year_selection,
+                                   first_year = first_year_forecast,
+                                   area = area,
+                                   scale = scale
+  )
+
+  f_table_2010 <- create_table(results_folder_path = results_folder_path_realisedF,
+                               fun = calc_avg,
+                               ifunc_groups = functional_group,
+                               yearly_in_filename = "Yearly",
+                               n_label_cols = 4,
+                               col_name = 'avg(F)',
+                               year = first_year_selection,
+                               first_year = first_year_forecast
+  )
+
+  f_table_2012 <- create_table(results_folder_path = results_folder_path_realisedF,
+                               fun = calc_avg,
+                               ifunc_groups = functional_group,
+                               yearly_in_filename = "Yearly",
+                               n_label_cols = 4,
+                               col_name = 'avg(F)',
+                               year = second_year_selection,
+                               first_year = first_year_forecast
+  )
+
+  f_table_2015 <- create_table(results_folder_path = results_folder_path_realisedF,
+                               fun = calc_avg,
+                               ifunc_groups = functional_group,
+                               yearly_in_filename = "Yearly",
+                               n_label_cols = 4,
+                               col_name = 'avg(F)',
+                               year = third_year_selection,
+                               first_year = first_year_forecast
+  )
+
+  tac_table_2010 <- create_table(results_folder_path = results_folder_path_HCR_Quota,
+                                 fun = calc_avg,
+                                 ifunc_groups = functional_group,
+                                 fleet_group_number = "AllFleets",
+                                 n_label_cols = 5,
+                                 col_name = 'avg(TAC)',
+                                 year = first_year_selection,
+                                 first_year = first_year_forecast
+  )
+
+  tac_table_2012 <- create_table(results_folder_path = results_folder_path_HCR_Quota,
+                                 fun = calc_avg,
+                                 ifunc_groups = functional_group,
+                                 fleet_group_number = "AllFleets",
+                                 n_label_cols = 5,
+                                 col_name = 'avg(TAC)',
+                                 year = second_year_selection,
+                                 first_year = first_year_forecast
+  )
+
+  tac_table_2015 <- create_table(results_folder_path = results_folder_path_HCR_Quota,
+                                 fun = calc_avg,
+                                 ifunc_groups = functional_group,
+                                 fleet_group_number = "AllFleets",
+                                 n_label_cols = 5,
+                                 col_name = 'avg(TAC)',
+                                 year = third_year_selection,
+                                 first_year = first_year_forecast
+  )
+
+
+  list_of_tables <- list(blim_table_2010, blim_table_2012, blim_table_2015,
+                         bpa_table_2010, bpa_table_2012, bpa_table_2015)
+
+  save_table_pdf(list_of_tables = list_of_tables, name_of_file = "table1",
+                 pdf_path = pdf_path,
+                 pdf.height = pdf.height, pdf.width = pdf.width)
+
+
+  list_of_tables <- list(f_table_2010, f_table_2012, f_table_2015,
+                         tac_table_2010, tac_table_2012, tac_table_2015,
+                         yield_table_2010, yield_table_2012, yield_table_2015)
+
+  save_table_pdf(list_of_tables = list_of_tables, name_of_file = "table2",
+                 pdf_path = pdf_path,
+                 pdf.height = pdf.height, pdf.width = pdf.width)
+
+  graphics.off()
+
+}
+
 # =======================================================================
 
 # functions to pass =====================================================

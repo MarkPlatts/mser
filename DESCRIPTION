@@ -3,7 +3,7 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("Mark", "Platts", email = "markplatts23@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Depends: 
+Depends:
     R (>= 3.4.2),
     data.table
 License: What license is it under?
@@ -13,5 +13,6 @@ Imports:
   ggplot2,
   stringr,
   gridExtra,
-    data.table
+    data.table,
+    dplyr
 RoxygenNote: 6.0.1

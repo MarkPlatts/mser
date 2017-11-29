@@ -330,7 +330,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
                                        Read.Function = fread)
   }
 
-  dt <- melt(dt, id.vars = 1:n_label_cols, variable.name = "TimeStep", value.name = "y_val")
+  dt <- data.table::melt(dt, id.vars = 1:n_label_cols, variable.name = "TimeStep", value.name = "y_val")
   dt <- dt[, .(y_val = sum(y_val)), by = .(ModelID, StrategyName, TimeStep)]
 
   dt <- dt[, TimeStep := as.numeric(TimeStep)]

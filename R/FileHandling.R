@@ -1,7 +1,17 @@
+#' Title
+#'
+#' @param Dir.Path
+#' @param StringsInFileName
+#' @param Read.Function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 LoadFile_ContainsListStrings = function(Dir.Path, StringsInFileName, Read.Function = read.csv)
   #Loads the file in folder specified containing all the strings in vector of strings
 {
-  
+
   #Get a list of all the files
   AllFiles <- list.files(Dir.Path)
   #Need to loop across all files so that we can extract
@@ -14,6 +24,6 @@ LoadFile_ContainsListStrings = function(Dir.Path, StringsInFileName, Read.Functi
     }
   }
   return(NA)
-  
+
 }
 

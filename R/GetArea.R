@@ -12,7 +12,7 @@ get_area <- function(path, file.name, area){
     stock.areas <- read.csv(stock.areas.file.path, stringsAsFactors = F)
     n.areas <- dim(stock.areas)[1]
     for(irow in 1:n.areas){
-      if(str_detect(str_to_upper(file.name), str_to_upper(stock.areas[irow,1]))) return (stock.areas[irow, 2])
+      if(stringr::str_detect(stringr::str_to_upper(file.name), stringr::str_to_upper(stock.areas[irow,1]))) return (stock.areas[irow, 2])
     }
   }
   return (area)

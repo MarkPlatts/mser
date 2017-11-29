@@ -4,10 +4,11 @@
 \alias{save_table_pdf}
 \title{Saves the table to}
 \usage{
-save_table_pdf(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width)
+save_table_pdf(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width,
+  number_decimal_places)
 }
 \arguments{
-\item{pdf.width}{}
+\item{number_decimal_places}{}
 }
 \description{
 Saves the table to

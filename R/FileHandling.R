@@ -1,13 +1,12 @@
-#' Title
+#' LoadFile_ContainsListStrings
 #'
-#' @param Dir.Path
-#' @param StringsInFileName
-#' @param Read.Function
+#' Finds the file that contains any number of strings at a specified location and loads as a data.frame or table
 #'
-#' @return
-#' @export
+#' @param Dir.Path The path to the directory in which to search
+#' @param StringsInFileName The vector of strings to search for
+#' @param Read.Function What to use to load the file e.g. read.csv, fread
 #'
-#' @examples
+#' @return the loeaded data.table or frame
 LoadFile_ContainsListStrings = function(Dir.Path, StringsInFileName, Read.Function = read.csv)
   #Loads the file in folder specified containing all the strings in vector of strings
 {

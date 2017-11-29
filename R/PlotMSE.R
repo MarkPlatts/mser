@@ -359,6 +359,8 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
 #' @param dt data.table
 #'
 #' @return data.table
+#'
+#' @export
 WrangleBoxplotMean <- function(dt){
 
   dt <- dt[, .(y_val = mean(y_val)), by = .(ModelID, StrategyName)]
@@ -372,6 +374,8 @@ WrangleBoxplotMean <- function(dt){
 #' @param bref the reference point that is being checked to see if y_val is going beneath
 #'
 #' @return data.table
+#'
+#' @export
 WrangleBoxplotProbability <- function(dt, bref){
 
   dt <- dt[, .(y_val = sum(y_val < bref) / .N), by = .(StrategyName, TimeStep)]
@@ -384,6 +388,8 @@ WrangleBoxplotProbability <- function(dt, bref){
 #' @param dt data.table
 #'
 #' @return data.table
+#'
+#' @export
 WrangleBoxplotAAV <- function(dt){
 
   dt[, diff := c(NA, diff(y_val)), by = .(ModelID, StrategyName)]
@@ -400,6 +406,8 @@ WrangleBoxplotAAV <- function(dt){
 #' @param dt data.table
 #'
 #' @return data.table
+#'
+#' @export
 WrangleTimeseriesAnnualChange = function(dt){
 
   dt[, diff := c(NA, diff(y_val)), by = .(ModelID, StrategyName)]
@@ -427,6 +435,8 @@ WrangleTimeseriesAnnualChange = function(dt){
 #' @param plot_height_inches The number of inches high for the produced plot
 #' @param units The units of the y-axis
 #' @param ... If you are using WrangleBoxplotProbability this will be bref
+#'
+#' @export
 PlotBoxplot <- function(dt, start_year, end_year,
                         wrangle_function, y_value_label, x_value_label, plot_title = NULL,
                         func_group_name, fleet_group_name,
@@ -473,6 +483,8 @@ PlotBoxplot <- function(dt, start_year, end_year,
 #' @param units The units of the y-axis
 #' @param wrangle_function Set to the type of data manipulation you want depending on the plot you are creating
 #' @param ... Not used in this function
+#'
+#' @export
 PlotTimeseries <- function(dt, start_year = NULL, end_year = NULL,
                            y_value_label, x_value_label,
                            func_group_name, fleet_group_name,
@@ -506,7 +518,7 @@ PlotTimeseries <- function(dt, start_year = NULL, end_year = NULL,
   g <- g + ggplot2::geom_ribbon(ggplot2::aes(ymin = Low50, ymax = Up50), fill = "grey50")
   g <- g + ggplot2::geom_line(ggplot2::aes(y = Median), colour = "black")
   g <- g + ggplot2::facet_grid(.~StrategyName)
-  g <- g + ggplot2::theme_bw() + ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1), panel.spacing = unit(2, "lines"))
+  g <- g + ggplot2::theme_bw() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), panel.spacing = ggplot2::unit(2, "lines"))
 
   ggplot2::ggsave(filename =  paste0(save_plot_folder, str_replace_all(Sys.time(), ":", "-"), "-timeseries-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")
 

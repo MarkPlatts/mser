@@ -79,12 +79,13 @@ create_table <- function(results_folder_path, ifunc_groups,
 #' @param pdf_path
 #' @param pdf.height
 #' @param pdf.width
+#' @param number_decimal_places
 #'
 #' @return
 #' @export
 #'
 #' @examples
-save_table_pdf <- function(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width){
+save_table_pdf <- function(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width, number_decimal_places){
 
   pdf_path_name <- paste0(pdf_path, name_of_file, ".pdf")
 
@@ -316,7 +317,8 @@ biomass_table_default <- function(number_decimal_places, functional_group,
 
   save_table_pdf(list_of_tables = list_of_tables, name_of_file = "table1",
                  pdf_path = pdf_path,
-                 pdf.height = pdf.height, pdf.width = pdf.width)
+                 pdf.height = pdf.height, pdf.width = pdf.width,
+                 number_decimal_places = number_decimal_places)
 
 
   list_of_tables <- list(f_table_2010, f_table_2012, f_table_2015,
@@ -325,7 +327,8 @@ biomass_table_default <- function(number_decimal_places, functional_group,
 
   save_table_pdf(list_of_tables = list_of_tables, name_of_file = "table2",
                  pdf_path = pdf_path,
-                 pdf.height = pdf.height, pdf.width = pdf.width)
+                 pdf.height = pdf.height, pdf.width = pdf.width,
+                 number_decimal_places = number_decimal_places)
 
   graphics.off()
 

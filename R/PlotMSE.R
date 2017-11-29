@@ -463,7 +463,7 @@ PlotBoxplot <- function(dt, start_year, end_year,
   }
 
   # Save plot
-  ggplot2::ggsave(filename =  paste0(save_plot_folder, str_replace_all(Sys.time(), ":", "-"), "-boxplot-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")
+  ggplot2::ggsave(filename =  paste0(save_plot_folder, stringr::str_replace_all(Sys.time(), ":", "-"), "-boxplot-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")
 
 }
 
@@ -520,7 +520,7 @@ PlotTimeseries <- function(dt, start_year = NULL, end_year = NULL,
   g <- g + ggplot2::facet_grid(.~StrategyName)
   g <- g + ggplot2::theme_bw() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), panel.spacing = ggplot2::unit(2, "lines"))
 
-  ggplot2::ggsave(filename =  paste0(save_plot_folder, str_replace_all(Sys.time(), ":", "-"), "-timeseries-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")
+  ggplot2::ggsave(filename =  paste0(save_plot_folder, stringr::str_replace_all(Sys.time(), ":", "-"), "-timeseries-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")
 
 }
 

@@ -14,7 +14,7 @@ LookupInFile <- function(file, x, header = TRUE){
   y <- NULL
 
   lookup_file <- read.csv(file, skip = as.integer(header), stringsAsFactors = F)
-  index <- which(str_detect(lookup_file[[1]], x))
+  index <- which(stringr::str_detect(lookup_file[[1]], x))
   y <- lookup_file[[2]][index]
 
   return(y)

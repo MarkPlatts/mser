@@ -336,7 +336,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
   dt <- dt[, TimeStep := as.numeric(TimeStep)]
 
   if(!is.null(total_area)){
-    area <- get_area(plot.path = results_folder_path, file.name = igroup, area = total_area)
+    area <- get_area(path = results_folder_path, file.name = igroup, area = total_area)
   } else {
     area = 1
   }

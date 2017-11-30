@@ -7,7 +7,7 @@
 #' @return the area as a numeric(1)
 #' @export
 get_area <- function(path, file.name, area){
-  stock.areas.file.path <- paste0(plot.path, "StockAreas.csv")
+  stock.areas.file.path <- paste0(path, "StockAreas.csv")
   if(file.exists(stock.areas.file.path)){
     stock.areas <- read.csv(stock.areas.file.path, stringsAsFactors = F)
     n.areas <- dim(stock.areas)[1]

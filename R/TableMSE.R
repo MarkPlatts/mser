@@ -74,12 +74,12 @@ create_table <- function(results_folder_path, ifunc_groups,
 
 #' Saves the table to
 #'
-#' @param list_of_tables
-#' @param name_of_file
-#' @param pdf_path
-#' @param pdf.height
-#' @param pdf.width
-#' @param number_decimal_places
+#' @param list_of_tables a list of tables that you want to combine and save to pdf
+#' @param name_of_file The name of the pdf file to be created
+#' @param pdf_path The path to where to save the pdf
+#' @param pdf.height The height of the pdf
+#' @param pdf.width The width of the pdf
+#' @param number_decimal_places The number of decimal places to display in the table
 #'
 #' @return
 #' @export
@@ -108,21 +108,21 @@ df_reduce_decimal_places <- function(major_table, number_decimal_places){
 
 #' Title
 #'
-#' @param number_decimal_places
-#' @param functional_group
-#' @param results_folder_path
-#' @param pdf_path
-#' @param pdf.height
-#' @param pdf.width
-#' @param first_year_hindcast
-#' @param first_year_forecast
-#' @param first_year_selection
-#' @param second_year_selection
-#' @param third_year_selection
-#' @param blim
-#' @param bpa
-#' @param area
-#' @param scale
+#' @param number_decimal_places The number of decimal places to display in the table
+#' @param functional_group The function group that the table is being created for
+#' @param results_folder_path The path to the folder holding the results csvs and folders
+#' @param pdf_path The path to where to save the pdf
+#' @param pdf.height The pdf height
+#' @param pdf.width The pdf width
+#' @param first_year_hindcast The actual first year of the hindcast e.g. 1990
+#' @param first_year_forecast The actual first year of the forecast e.g. 1990
+#' @param first_year_selection The actual first year of the selection e.g. 1990
+#' @param second_year_selection The actual second year of the selection e.g. 1990
+#' @param third_year_selection The actual third year of the selection e.g. 1990
+#' @param blim The blim for the given functional group
+#' @param bpa Bpa for the given functional group
+#' @param area The area of the EwE model
+#' @param scale A scaling parameter, e.g. setting to 1000 it will divide the output values by 1000
 #'
 #' @return
 #' @export

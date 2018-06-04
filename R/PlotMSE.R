@@ -503,13 +503,13 @@ PlotTimeseries <- function(dt, start_year = NULL, end_year = NULL,
     dt <- wrangle_function(dt, ...)
   }
 
-  dt_out <- dt[, .(Low90 = quantile(y_val, probs = 0.05),
-                   Low75 = quantile(y_val, probs = 0.125),
-                   Low50 = quantile(y_val, probs = 0.25),
-                   Median = quantile(y_val, probs = 0.5),
-                   Up50 = quantile(y_val, probs = 0.75),
-                   Up75 = quantile(y_val, probs = 0.875),
-                   Up90 = quantile(y_val, probs = 0.95)),
+  dt_out <- dt[, .(Low90 = quantile(y_val, probs = 0.05, na.rm = T),
+                   Low75 = quantile(y_val, probs = 0.125, na.rm = T),
+                   Low50 = quantile(y_val, probs = 0.25, na.rm = T),
+                   Median = quantile(y_val, probs = 0.5, na.rm = T),
+                   Up50 = quantile(y_val, probs = 0.75, na.rm = T),
+                   Up75 = quantile(y_val, probs = 0.875, na.rm = T),
+                   Up90 = quantile(y_val, probs = 0.95, na.rm = T)),
                by = .(StrategyName, TimeStep)]
 
   dt_out[, TimeStep := TimeStep + true_year_beginning - 1]

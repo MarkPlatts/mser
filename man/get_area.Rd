@@ -4,9 +4,11 @@
 \alias{get_area}
 \title{Get Area}
 \usage{
-get_area(plot.path, file.name, area)
+get_area(path, file.name, area)
 }
 \arguments{
+\item{path}{the path to where the StockAreas.csv file is held}
+
 \item{file.name}{the name of the result file that is being plotted}
 
 \item{area}{the area represented by the functional group found in the result file name}

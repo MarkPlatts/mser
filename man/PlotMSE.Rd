@@ -75,6 +75,7 @@ PlotMSE(
   n_label_cols = 5,
   yearly_in_filename = TRUE,
   results_folder_path = paste0(results_folder, "CatchTrajectories/"),
+  fleet_lookup_file = fleet_lookup_table,
   save_plot_folder = plots_folder,
   wrangle_function = WrangleBoxplotAAV,
   plot_type_fun = PlotBoxplot
@@ -126,6 +127,7 @@ PlotMSE(
   yearly_in_filename = TRUE,
   results_folder_path = paste0(results_folder, "CatchTrajectories/"),
   save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
   total_area = 240000,
   scale_unit = 1000,
   wrangle_function = WrangleBoxplotMean,
@@ -193,6 +195,7 @@ PlotMSE(func_group_name = "AdCod", fleet_group_name = "AllFleets",
         yearly_in_filename = FALSE,
         results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
         save_plot_folder = plots_folder,
+        fleet_lookup_file = fleet_lookup_table,
         total_area = 240000,
         scale_unit = 1000,
         wrangle_function = WrangleBoxplotMean,
@@ -210,6 +213,7 @@ PlotMSE(
   n_label_cols = 4,
   yearly_in_filename = TRUE,
   results_folder_path = paste0(results_folder, "Effort/"),
+  fleet_lookup_file = fleet_lookup_table,
   save_plot_folder = plots_folder,
   fleet_lookup_file = fleet_lookup_table,
   wrangle_function = WrangleBoxplotMean,
@@ -258,6 +262,7 @@ PlotMSE(
   yearly_in_filename = FALSE,
   results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
   save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
   wrangle_function = WrangleTimeseriesAnnualChange,
   plot_type_fun = PlotTimeseries
 )
@@ -273,6 +278,7 @@ PlotMSE(
   yearly_in_filename = TRUE,
   results_folder_path = paste0(results_folder, "CatchTrajectories/"),
   save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
   total_area = 240000,
   scale_unit = 1000,
   plot_type_fun = PlotTimeseries
@@ -304,6 +310,7 @@ PlotMSE(
   yearly_in_filename = FALSE,
   results_folder_path = paste0(results_folder, "HCRQuota_Targ/"),
   save_plot_folder = plots_folder,
+  fleet_lookup_file = fleet_lookup_table,
   total_area = 240000,
   scale_unit = 1000,
   plot_type_fun = PlotTimeseries

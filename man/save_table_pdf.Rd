@@ -8,7 +8,17 @@ save_table_pdf(list_of_tables, name_of_file, pdf_path, pdf.height, pdf.width,
   number_decimal_places)
 }
 \arguments{
-\item{number_decimal_places}{}
+\item{list_of_tables}{a list of tables that you want to combine and save to pdf}
+
+\item{name_of_file}{The name of the pdf file to be created}
+
+\item{pdf_path}{The path to where to save the pdf}
+
+\item{pdf.height}{The height of the pdf}
+
+\item{pdf.width}{The width of the pdf}
+
+\item{number_decimal_places}{The number of decimal places to display in the table}
 }
 \description{
 Saves the table to

@@ -128,13 +128,13 @@ df_reduce_decimal_places <- function(major_table, number_decimal_places){
 #' @export
 #'
 #' @examples
-#' biomass_table_default(number_decimal_places = 4, functional_group = "AdCod",
+#' table_default(number_decimal_places = 4, functional_group = "AdCod",
 #' results_folder_path = "C:/Users/Mark/Box Sync/Baltic - Stockholm/Results-and-plots-2017-09-08/Results/",
 #' pdf_path = "C:/Users/Mark/Desktop/Plots/", pdf.height = 2, pdf.width = 17,
 #' first_year_hindcast = 1990, first_year_forecast = 2000, first_year_selection = 2010,
 #' second_year_selection = 2012, third_year_selection = 2015,
 #' blim = 0.4, bpa = 0.5, area = 240000, scale = 1000)
-biomass_table_default <- function(number_decimal_places, functional_group,
+table_default <- function(number_decimal_places, functional_group,
                                   results_folder_path, pdf_path, pdf.height, pdf.width,
                                   first_year_hindcast, first_year_forecast, first_year_selection,
                                   second_year_selection, third_year_selection,

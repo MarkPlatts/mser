@@ -337,6 +337,8 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
                                        Read.Function = fread)
   }
 
+  dt$'1' <- as.numeric(dt$'1')
+
   dt <- data.table::melt(dt, id.vars = 1:n_label_cols, variable.name = "TimeStep", value.name = "y_val")
   dt <- dt[, .(y_val = sum(y_val)), by = .(ModelID, StrategyName, TimeStep)]
 
@@ -420,6 +422,8 @@ WrangleTimeseriesAnnualChange = function(dt){
   dt[, diff := c(NA, diff(y_val)), by = .(ModelID, StrategyName)]
   dt <- dt[as.numeric(TimeStep)>1]
   dt_out <- dt[, .(y_val = 100 * diff/y_val), by = .(TimeStep, ModelID, StrategyName)]
+
+  if(any(is.nan(dt_out$y_val))) warning("When calculating the % Annual Change, some of the values were zero, meaning that it calculated some values to be infinite")
 
   return(dt_out)
 

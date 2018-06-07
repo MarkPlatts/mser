@@ -528,7 +528,7 @@ PlotTimeseries <- function(dt, start_year = NULL, end_year = NULL,
   g <- g + ggplot2::geom_ribbon(ggplot2::aes(ymin = Low75, ymax = Up75), fill = "grey75")
   g <- g + ggplot2::geom_ribbon(ggplot2::aes(ymin = Low50, ymax = Up50), fill = "grey50")
   g <- g + ggplot2::geom_line(ggplot2::aes(y = Median), colour = "black")
-  g <- g + ggplot2::facet_grid(.~StrategyName)
+  g <- g + ggplot2::facet_wrap(~StrategyName, ncol = 4)
   g <- g + ggplot2::theme_bw() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), panel.spacing = ggplot2::unit(2, "lines"))
 
   ggplot2::ggsave(filename =  paste0(save_plot_folder, stringr::str_replace_all(Sys.time(), ":", "-"), "-timeseries-", y_value_label, "-", list_of_groups_string, ".pdf"), plot = g, height = plot_height_inches, width = plot_width_inches, units = "in")

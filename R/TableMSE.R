@@ -95,7 +95,7 @@ save_table_pdf <- function(list_of_tables, name_of_file, pdf_path, pdf.height, p
   major_table <- df_reduce_decimal_places(major_table, number_decimal_places)
 
   pdf(pdf_path_name, height = pdf.height, width = pdf.width)
-  gridExtra::grid.table(major_table)
+  gridExtra::grid.table(major_table, rows = NULL)
   dev.off()
 
 }
@@ -104,6 +104,7 @@ df_reduce_decimal_places <- function(major_table, number_decimal_places){
   major_table <- as.data.frame(major_table)
   is.num <- sapply(major_table, is.numeric)
   major_table[is.num] <- as.data.table(lapply(major_table[is.num], round, number_decimal_places))
+  return(major_table)
 }
 
 #' Title
@@ -150,7 +151,7 @@ table_default <- function(number_decimal_places, functional_group,
                                   ifunc_groups = functional_group,
                                   yearly_in_filename = "Yearly",
                                   n_label_cols = 4,
-                                  col_name = 'p(<Blim)',
+                                  col_name = 'p(B<Blim)',
                                   year = first_year_selection,
                                   first_year = first_year_hindcast,
                                   bref = blim
@@ -161,7 +162,7 @@ table_default <- function(number_decimal_places, functional_group,
                                   ifunc_groups = functional_group,
                                   yearly_in_filename = "Yearly",
                                   n_label_cols = 4,
-                                  col_name = 'p(<Blim)',
+                                  col_name = 'p(B<Blim)',
                                   year = second_year_selection,
                                   first_year = first_year_hindcast,
                                   bref = blim
@@ -172,7 +173,7 @@ table_default <- function(number_decimal_places, functional_group,
                                   ifunc_groups = functional_group,
                                   yearly_in_filename = "Yearly",
                                   n_label_cols = 4,
-                                  col_name = 'p(<Blim)',
+                                  col_name = 'p(B<Blim)',
                                   year = third_year_selection,
                                   first_year = first_year_hindcast,
                                   bref = blim
@@ -194,7 +195,7 @@ table_default <- function(number_decimal_places, functional_group,
                                  ifunc_groups = functional_group,
                                  yearly_in_filename = "Yearly",
                                  n_label_cols = 4,
-                                 col_name = 'p(<Bpa)',
+                                 col_name = 'p(B<Bpa)',
                                  year = second_year_selection,
                                  first_year = first_year_hindcast,
                                  bref = bpa
@@ -205,7 +206,7 @@ table_default <- function(number_decimal_places, functional_group,
                                  ifunc_groups = functional_group,
                                  yearly_in_filename = "Yearly",
                                  n_label_cols = 4,
-                                 col_name = 'p(<Bpa)',
+                                 col_name = 'p(B<Bpa)',
                                  year = third_year_selection,
                                  first_year = first_year_hindcast,
                                  bref = bpa

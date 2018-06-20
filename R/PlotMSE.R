@@ -419,8 +419,9 @@ WrangleBoxplotAAV <- function(dt){
 #' @export
 WrangleTimeseriesAnnualChange = function(dt){
 
-  dt[, diff := c(NA, diff(y_val)), by = .(ModelID, StrategyName)]
-  dt <- dt[as.numeric(TimeStep)>1]
+  dt[, diff := c(diff(y_val), NA), by = .(ModelID, StrategyName)]
+  dt <- dt[as.numeric(TimeStep)<max(TimeStep)]
+
   dt_out <- dt[, .(y_val = 100 * diff/y_val), by = .(TimeStep, ModelID, StrategyName)]
 
   if(any(is.nan(dt_out$y_val))) warning("When calculating the % Annual Change, some of the values were zero, meaning that it calculated some values to be infinite")

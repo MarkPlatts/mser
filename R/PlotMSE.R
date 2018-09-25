@@ -297,6 +297,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
                     plot_width_inches, plot_height_inches,
                     y_value_label, x_value_label, plot_title = NULL,
                     units = "", n_label_cols, yearly_in_filename, results_folder_path,
+                    results_folder_name,
                     save_plot_folder, fleet_lookup_file = NULL, total_area = NULL,
                     scale_unit = 1, wrangle_function = NULL, plot_type_fun, ...){
 
@@ -320,7 +321,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
       } else {
         strings_in_filename <- c(ifunc_groups, fleet_group_number)
       }
-      dt_temp <- LoadFile_ContainsListStrings(Dir.Path = results_folder_path,
+      dt_temp <- LoadFile_ContainsListStrings(Dir.Path = paste0(results_folder, results_folder_name, "/"),
                                               StringsInFileName = strings_in_filename,
                                               Read.Function = fread)
       dt <- rbind(dt, dt_temp)
@@ -332,7 +333,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
       strings_in_filename <- c(fleet_group_number)
     }
 
-    dt <- LoadFile_ContainsListStrings(Dir.Path = results_folder_path,
+    dt <- LoadFile_ContainsListStrings(Dir.Path = paste0(results_folder, results_folder_name, "/"),
                                        StringsInFileName = strings_in_filename,
                                        Read.Function = fread)
   }
@@ -345,7 +346,7 @@ PlotMSE <- function(func_group_name = NULL, fleet_group_name = NULL,
   dt <- dt[, TimeStep := as.numeric(TimeStep)]
 
   if(!is.null(total_area)){
-    area <- get_area(path = results_folder_path, file.name = igroup, area = total_area)
+    area <- get_area(path = results_folder_path, func_group = func_group_name, area = total_area)
   } else {
     area = 1
   }
@@ -460,8 +461,10 @@ PlotBoxplot <- function(dt, start_year, end_year,
 
   # Plot
   y_label <- paste0(y_value_label, ifelse(units=="", "", paste0(" (", units, ")")))
-  g <- ggplot2::ggplot(data = dt, ggplot2::aes(x = StrategyName, y = y_val)) + ggplot2::geom_boxplot() +
+  g <- ggplot2::ggplot(data = dt, ggplot2::aes(x = StrategyName, y = y_val)) +
+    ggplot2::geom_boxplot() +
     ggplot2::labs(x = x_value_label, y = y_label) +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
     ggplot2::expand_limits(y = 0)
   list_of_groups_string <- CreateListString(c(func_group_name, fleet_group_name))
   if(!is.null(plot_title)){
